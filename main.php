@@ -14,7 +14,7 @@ $_SESSION['csrf_token'] = $token;
 </head>
 <body>
 <form action="">
-    <input type="hidden" value="<?php echo $token; ?>">
+    <input type="hidden" name="csrf_token" value="<?php echo $token; ?>">
     <input type="text">
     <input type="number">
     <input type="number">
