@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+$token = md5(uniqid(mt_rand(), TRUE));
+$_SESSION['csrf_token'] = $token;
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +14,7 @@
 </head>
 <body>
 <form action="">
+    <input type="hidden" value="<?php echo $token; ?>">
     <input type="text">
     <input type="number">
     <input type="number">
