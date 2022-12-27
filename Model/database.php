@@ -3,7 +3,7 @@
 class DB
 {
     public $error = '';
-    private $pdo;
+    public $pdo;
 
     const DB_HOST = "localhost";
     const DB_NAME = "payment";
@@ -13,13 +13,17 @@ class DB
 
     public function __construct()
     {
-        $this->pdo = new PDO((string) [
-            "mysql:host=" . $this::DB_HOST . ";dbname=" . $this::DB_NAME . ";charset=" . $this::DB_CHARSET,
-            $this::DB_USER, $this::DB_PASSWORD, [
+        try {
+
+            $this->pdo = new PDO(
+                "mysql:host=" . $this::DB_HOST . ";dbname=" . $this::DB_NAME . ";charset=" . $this::DB_CHARSET,
+                $this::DB_USER, $this::DB_PASSWORD, [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-            ]
-        ]);
+            ]);
+        } catch (PDOException $exception) {
+            die($exception->getMessage());
+        }
     }
 
     public function __destruct()

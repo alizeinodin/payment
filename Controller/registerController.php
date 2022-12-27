@@ -1,5 +1,6 @@
 <?php
 require_once '../Model/database.php';
+require_once 'Controller.php';
 
 class registerController implements Controller
 {
@@ -34,9 +35,10 @@ class registerController implements Controller
         unset($_SESSION['ERROR.message']);
         unset($_SESSION['ERROR.type']);
 
-        $this->validation();
+//        $this->validation();
 
-        $prepare = $_DB->prepare("SELECT * FROM `user` WHERE ssn = {$_POST['ssn']} OR phone = {$_POST['phone']} OR stn = {$_POST['stn']}");
+        $_DB = new DB();
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE `ssn` = '{$_POST['ssn']}' OR `phone` = '{$_POST['phone']}' OR `stn` = '{$_POST['stn']}'");
         $prepare->execute();
         $result = $prepare->fetchAll();
 
@@ -45,9 +47,11 @@ class registerController implements Controller
             $_SESSION['ERROR.type'] = 'global';
         }
 
-        $prepare = $_DB->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`) 
-            VALUES ({$_POST['name']}, {$_POST['ssn']}, {$_POST['phone']},'{$_POST['stn']}')");
-        $prepare->execute();
+        $this->tokenRequest();
+
+//        $prepare = $_DB->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`)
+//            VALUES ({$_POST['name']}, {$_POST['ssn']}, {$_POST['phone']},'{$_POST['stn']}')");
+//        $prepare->execute();
     }
 
     private function tokenRequest()
@@ -69,7 +73,7 @@ class registerController implements Controller
         $response = curl_exec($curl);
         curl_close($curl);
 
-        var_dump($response);
+        print_r($response);
     }
 
     private function nameValidation()
