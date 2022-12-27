@@ -47,11 +47,21 @@ class registerController implements Controller
             $_SESSION['ERROR.type'] = 'global';
         }
 
-        $this->tokenRequest();
+        $prepare = $_DB->pdo->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`)
+            VALUES ({$_POST['name']}, {$_POST['ssn']}, {$_POST['phone']},'{$_POST['stn']}')");
+        $prepare->execute();
 
-//        $prepare = $_DB->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`)
-//            VALUES ({$_POST['name']}, {$_POST['ssn']}, {$_POST['phone']},'{$_POST['stn']}')");
-//        $prepare->execute();
+        $this->makeOrder();
+//        $this->tokenRequest();
+
+    }
+
+    private function makeOrder(){
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'ssn' = '{$_POST['ssn']}'");
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+
+        var_dump($result);
     }
 
     private function tokenRequest()
@@ -67,7 +77,7 @@ class registerController implements Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => 'api_key=65d94dfb-19d8-4357-bcf4-cf570abcf251&amount=20000&callback_uri=https://yourWebsite.com/callback',
+            CURLOPT_POSTFIELDS => 'api_key=65d94dfb-19d8-4357-bcf4-cf570abcf251&amount=20000&callback_uri=https://barfenow.ir/ssces/Controller/registerController.php',
         ]);
 
         $response = curl_exec($curl);
