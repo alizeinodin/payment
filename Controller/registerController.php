@@ -31,7 +31,19 @@ class registerController implements Controller
 
     public function prepare()
     {
+        unset($_SESSION['ERROR.message']);
+        unset($_SESSION['ERROR.type']);
+
         $this->validation();
+
+        $prepare = $_DB->prepare("SELECT * FROM user WHERE ssn = {$_POST['ssn']} OR phone = {$_POST['phone']} OR stn = {$_POST['stn']}");
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+
+        if (count($result) != 0) {
+            $_SESSION['ERROR.message'] = 'شما قبلا ثبت نام کرده اید';
+            $_SESSION['ERROR.type'] = 'global';
+        }
     }
 
     private function nameValidation()
