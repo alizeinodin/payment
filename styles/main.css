@@ -31,6 +31,7 @@ body {
   font-size: 16px;
   font-family: "Vazir-Regular";
   color: #fff;
+
 }
 p{
   line-height: 24px;
@@ -64,4 +65,11 @@ input[type="submit"] {
   background-color: #291143;
   color: #fff;
   cursor: pointer;
+}
+canvas {
+  width: 40vw;
+  /* height: 50vh; */
+  z-index: 1000;
+  position: absolute;
+  top: 0;
 }
