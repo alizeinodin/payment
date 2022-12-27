@@ -24,19 +24,19 @@ class registerController implements Controller
         if (!$this->phoneValidation()) {
             $_SESSION['ERROR.message'] = 'تلفن شما به درستی وارد نشده است!';
             $_SESSION['ERROR.type'] = 'phone';
-            header('location:../main.php');
+            header('location:../index.php');
             return false;
         }
         if (!$this->ssnValidation()) {
             $_SESSION['ERROR.message'] = 'شماره ملی شما به درستی وارد نشده است!';
             $_SESSION['ERROR.type'] = 'ssn';
-            header('location:../main.php');
+            header('location:../index.php');
             return false;
         }
         if (!$this->stnValidation()) {
             $_SESSION['ERROR.message'] = 'شماره دانشجویی شما به درستی وارد نشده است!';
             $_SESSION['ERROR.type'] = 'stn';
-            header('location:../main.php');
+            header('location:../index.php');
             return false;
         }
         return true;
@@ -60,7 +60,8 @@ class registerController implements Controller
         if ($result != 0) {
             $_SESSION['ERROR.message'] = 'شما قبلا ثبت نام کرده اید';
             $_SESSION['ERROR.type'] = 'global';
-            die(header('location:../main.php'));
+            header('location:../index.php');
+            return false;
         }
 
         $prepare = $_DB->pdo->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`)

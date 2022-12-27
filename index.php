@@ -24,7 +24,20 @@ $_SESSION['csrf_token'] = $token;
         <form action="Controller/registerController.php" method="post">
             <input type="hidden" name="csrf_token" value="<?php echo $token; ?>">
             <input type="text" name="name" placeholder="نام نام خانوادگی"/>
-            <span class="error" id="name">نام وارد شده معتبر نمی باشد.</span>
+            <span class="error" id="name">
+                <?php
+                if (isset($_SESSION['ERROR.type'])) {
+                    if ($_SESSION['ERROR.type'] == 'global') {
+                        echo $_SESSION['ERROR.message'];
+                    } else {
+                        echo " نام وارد شده معتبر نمی باشد.";
+                    }
+                } else {
+                    echo " نام وارد شده معتبر نمی باشد.";
+                }
+
+                ?>
+               </span>
             <input type="text" name="ssn" placeholder="کد ملی"/>
             <span class="error" id="nationcode"
             >کد ملی وارد شده معتبر نمی باشد.</span
@@ -101,6 +114,11 @@ $_SESSION['csrf_token'] = $token;
     showStuNumberError();
     <?php
     break;
+    case 'global':
+        ?>
+    showNameError();
+    <?php
+        break;
     }
     }
     ?>
