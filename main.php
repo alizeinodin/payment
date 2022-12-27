@@ -13,12 +13,12 @@ $_SESSION['csrf_token'] = $token;
     <title>Title</title>
 </head>
 <body>
-<form action="">
+<form action="Controller/registerController.php">
     <input type="hidden" name="csrf_token" value="<?php echo $token; ?>">
-    <input type="text">
-    <input type="number">
-    <input type="number">
-    <input type="tel">
+    <input type="text" name="name">
+    <input type="text" name="ssn">
+    <input type="text" name="phone">
+    <input type="text" name="stn">
     <input type="submit">
 </form>
 </body>
