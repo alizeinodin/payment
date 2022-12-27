@@ -1,6 +1,7 @@
 <?php
 require_once '../Model/database.php';
 require_once 'Controller.php';
+session_start();
 
 class registerController implements Controller
 {
@@ -39,16 +40,16 @@ class registerController implements Controller
     {
         $_DB = new DB();
 
-        unset($_SESSION['ERROR.message']);
-        unset($_SESSION['ERROR.type']);
+//        unset($_SESSION['ERROR.message']);
+//        unset($_SESSION['ERROR.type']);
 
         $this->validation();
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE `ssn` = '{$_POST['ssn']}' OR `phone` = '{$_POST['phone']}' OR `stn` = '{$_POST['stn']}'");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'ssn' = '{$_POST['ssn']}' OR 'phone' = '{$_POST['phone']}' OR 'stn' = '{$_POST['stn']}'");
         $prepare->execute();
-        $result = $prepare->fetchAll();
+        $result = $prepare->rowCount();
 
-        if (count($result) != 0) {
+        if ($result != 0) {
             $_SESSION['ERROR.message'] = 'شما قبلا ثبت نام کرده اید';
             $_SESSION['ERROR.type'] = 'global';
         }
@@ -65,8 +66,8 @@ class registerController implements Controller
     private function makeOrder()
     {
         $_DB = new DB();
-
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'ssn' = '{$_POST['ssn']}'");
+        var_dump($_POST['ssn']);
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'ssn'='{$_POST['ssn']}'");
         $prepare->execute();
         $result = $prepare->fetchAll();
 
