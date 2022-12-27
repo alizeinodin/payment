@@ -53,7 +53,7 @@ class registerController implements Controller
             return false;
         }
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}'");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`, `pay` WHERE ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}'");
         $prepare->execute();
         $result = $prepare->rowCount();
 
@@ -71,6 +71,8 @@ class registerController implements Controller
         $orderId = $this->makeOrder();
         $token = $this->tokenRequest($orderId);
 
+        header("location:https://nextpay.org/nx/gateway/payment/{$token}");
+        return true;
     }
 
     private function makeOrder()
@@ -109,7 +111,7 @@ class registerController implements Controller
         curl_close($curl);
 
         $res = json_decode($response);
-        if ($res['code'] == '-1') {
+        if ($res['code'] == -1) {
             return $res['trans_id'];
         }
         header("location:../index.php");
