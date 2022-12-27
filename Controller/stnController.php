@@ -1,7 +1,6 @@
 <?php
 require_once 'Controller.php';
 require_once '../Model/database.php';
-$_DB = new DB();
 class stnController implements Controller {
 
     public function validation()
@@ -14,7 +13,18 @@ class stnController implements Controller {
         // TODO: Implement prepare() method.
     }
 
-    private function isRegister()
+    private function notRegister()
     {
+        $_DB = new DB();
+
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'stn' = '{$_POST['stn']}");
+        $prepare->execute();
+
+        $result = $prepare->fetchAll();
+
+        if (count($result) == 0) {
+            return true;
+        }
+        return false;
     }
 }
