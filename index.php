@@ -19,9 +19,8 @@ $_SESSION['csrf_token'] = $token;
 </head>
 <body>
 <div class="main">
-    <div class="formContainer">
-        <span id="title">ثبت نام در سمینار</span>
-        <form action="Controller/registerController.php" method="post">
+    <form action="Controller/registerController.php" method="post">
+            <span id="title">ثبت نام در سمینار</span>
             <input type="hidden" name="csrf_token" value="<?php echo $token; ?>">
             <input type="text" name="name" placeholder="نام نام خانوادگی"/>
             <span class="error" id="name">
@@ -60,7 +59,6 @@ $_SESSION['csrf_token'] = $token;
                 <span id="price">مبلغ: 20,000 تومان</span>
             </div>
         </form>
-    </div>
     <div class="infoContainer">
         <canvas></canvas>
         <div class="content">
