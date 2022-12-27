@@ -49,6 +49,7 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: formAnim 2s ;
 }
 #title {
   font-size: 20px;
@@ -61,6 +62,7 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
 }
 #note {
   font-size: 15px;
@@ -182,6 +184,12 @@ canvas {
   position: absolute;
   bottom: 7vh;
   z-index: 1000;
+}
+@keyframes formAnim {
+  from { transform: rotateY(90deg);
+  opacity:0}
+  to { transform: rotateY(0deg);
+  opacity:100}
 }
 
 @media screen and (max-width: 992px) {
