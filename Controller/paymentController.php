@@ -2,7 +2,7 @@
 require_once 'Controller.php';
 require_once '../Model/database.php';
 
-class payment implements Controller
+class paymentController implements Controller
 {
     private $callback_uri = "https://ssces.barfenow.ir/Controller/paymentController.php";
 

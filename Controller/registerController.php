@@ -2,6 +2,7 @@
 require_once '../Model/database.php';
 require_once 'Controller.php';
 require_once 'stnController.php';
+require_once 'paymentController.php';
 
 session_start();
 
@@ -55,7 +56,7 @@ class registerController implements Controller
             return false;
         }
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`, `payment` WHERE (ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}') and payment.user_id = user.id and payment.status = 'accepted'");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`, `pay` WHERE (ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}') and pay.user_id = user.id and pay.status = 'accepted'");
         $prepare->execute();
         $result = $prepare->rowCount();
 
@@ -85,19 +86,27 @@ class registerController implements Controller
                 $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted' WHERE id = '{$this->order_id}'");
                 $prepare->execute();
 
-                header("location:https://ssces.barfenow.ir/ticket.php");
+                $_SESSION['name'] = $_POST['name'];
+                $_SESSION['stn'] = $_POST['stn'];
 
+                header("location:../ticket.php");
+                return true;
             }
         } else if (strlen($stn) == 10) {
             if (preg_match("/^(\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
                 $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted' WHERE id = '{$this->order_id}'");
                 $prepare->execute();
 
-                header("location:https://ssces.barfenow.ir/ticket.php");
+                $_SESSION['name'] = $_POST['name'];
+                $_SESSION['stn'] = $_POST['stn'];
+
+                header("location:../ticket.php");
+
+                return true;
             }
         }
 
-        $payment = new payment();
+        $payment = new paymentController();
         $token = $payment->tokenRequest($orderId);
 
         header("location:https://nextpay.org/nx/gateway/payment/{$token}");
@@ -113,7 +122,7 @@ class registerController implements Controller
         $result = $prepare->fetchAll();
         $user = $result[0];
 
-        $prepare = $_DB->pdo->prepare("INSERT INTO `payment` 
+        $prepare = $_DB->pdo->prepare("INSERT INTO `pay` 
             (`amount`, `status`, `created_at`, `user_id`)
             VALUES ('20000', 'pending', now(), '{$user['id']}')");
         $prepare->execute();
