@@ -16,6 +16,8 @@ $_SESSION['csrf_token'] = $token;
     <link rel="stylesheet" href="./styles/fontFaces.css"/>
     <link rel="stylesheet" href="./styles/main.css"/>
     <link rel="icon" href="./assets/images/logo.png"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 <body>
 <div class="main">
