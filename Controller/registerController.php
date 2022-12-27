@@ -53,7 +53,7 @@ class registerController implements Controller
             return false;
         }
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`, `pay` WHERE ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}'");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`, `payment` WHERE (ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}') and payment.user_id = user.id and payment.status = 'accepted'");
         $prepare->execute();
         $result = $prepare->rowCount();
 
@@ -64,9 +64,15 @@ class registerController implements Controller
             return false;
         }
 
-        $prepare = $_DB->pdo->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`)
-            VALUES ('{$_POST['name']}', '{$_POST['ssn']}', '{$_POST['phone']}','{$_POST['stn']}')");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}' ");
         $prepare->execute();
+        $result = $prepare->rowCount();
+
+        if ($result == 0) {
+            $prepare = $_DB->pdo->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`)
+            VALUES ('{$_POST['name']}', '{$_POST['ssn']}', '{$_POST['phone']}','{$_POST['stn']}')");
+            $prepare->execute();
+        }
 
         $orderId = $this->makeOrder();
         $token = $this->tokenRequest($orderId);
