@@ -1,7 +1,9 @@
 <?php
 require_once 'Controller.php';
 require_once '../Model/database.php';
-class stnController implements Controller {
+
+class stnController implements Controller
+{
 
     public function validation()
     {
@@ -26,5 +28,23 @@ class stnController implements Controller {
             return true;
         }
         return false;
+    }
+
+    private function isSSCESStudent()
+    {
+        $stn = $_POST['stn'];
+        if (strlen($stn) == 11) {
+            if (preg_match("/^(4\d\d)12358\d\d\d/gm", $stn)) {
+                return true;
+            }
+            return false;
+        } else if (strlen($stn) == 10) {
+            if (preg_match("/^(\d\d)12358\d\d\d/gm", $stn)) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+
     }
 }
