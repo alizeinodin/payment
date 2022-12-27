@@ -1,12 +1,12 @@
 @font-face {
   font-family: "Vazir-Bold";
-  src: url("./../fonts//Vazir-Bold-FD.ttf");
+  src: url("./../assets/fonts/Vazir-Bold-FD.ttf");
 }
 @font-face {
   font-family: "Vazir-Medium";
-  src: url("./../fonts/Vazir-Medium-FD.ttf");
+  src: url("./../assets/fonts/Vazir-Medium-FD.ttf");
 }
 @font-face {
   font-family: "Vazir-Regular";
-  src: url("./../fonts/Vazir-Regular-FD.ttf");
+  src: url("./../assets/fonts/Vazir-Regular-FD.ttf");
 }
