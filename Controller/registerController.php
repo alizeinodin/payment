@@ -7,7 +7,10 @@ class registerController implements Controller
 
     public function validation()
     {
-
+        if ($_SESSION['csrf_token'] != $_POST['csrf_token']) {
+            $_SESSION['ERROR.message'] = 'درخواست شما پذیرفته نشد!';
+            $_SESSION['ERROR.type'] = 'csrf';
+        }
     }
 
     public function prepare()
