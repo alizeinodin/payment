@@ -27,6 +27,8 @@ body {
   height: 25vh;
   background-color: #291143;
   border-radius: 8px 8px 0 0;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
 }
 .ticketHeader > span {
   font-size: 18px;
@@ -67,28 +69,39 @@ body {
   align-items: center;
   justify-content: center;
 }
-.circle{
-    width: 2.5vw;
-    height: 2.5vw;
-    border-radius: 150px;
-    background-color: #dfe0e3;
+.circle {
+  width: 2.5vw;
+  height: 2.5vw;
+  border-radius: 150px;
+  background-color: #dfe0e3;
 }
-.line{
-    width: 27vw;
-    height: 1px;
-    border-top-style: dashed;
-    border-top-color: #4d4d4d;
-    border-top-width: 1px;
+.line {
+  width: 27vw;
+  height: 1px;
+  border-top-style: dashed;
+  border-top-color: #4d4d4d;
+  border-top-width: 1px;
 }
 #barcode {
   width: 25vw;
   height: 15vh;
 }
-@media screen and (max-width:992px){
-    .ticketContainer{
-        width: 80vw;
-    }
-    .line{
-        width: 78vw;
-    }    
+@media screen and (max-width: 992px) {
+  .ticketContainer {
+    width: 80vw;
+  }
+  .line {
+    width: 78vw;
+  }
+}
+#printbtn {
+  margin-top: 12px;
+  width: 30vw;
+  height: 32px;
+  background-color: #291143;
+  color: #fff;
+  font-size: 16px;
+  font-family: "Vazir-Medium";
+  border: none;
+  border-radius: 8px;
 }

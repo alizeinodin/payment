@@ -73,5 +73,37 @@ $_SESSION['csrf_token'] = $token;
 
 </div>
 <script src="./scripts/script.js"></script>
+<script src="./scripts/main.js"></script>
+<script>
+    <?php
+    if (isset($_SESSION['ERROR.type'])) {
+    switch ($_SESSION['ERROR.type']) {
+    case 'csrf':
+        echo "درخواست نامعتبر است!";
+        break;
+    case 'name':
+    ?>
+    showNameError();
+    <?php
+    break;
+    case 'phone':
+    ?>
+    showTellError();
+    <?php
+    break;
+    case 'ssn':
+    ?>
+    showNationCodeError();
+    <?php
+    break;
+    case 'stn':
+    ?>
+    showStuNumberError();
+    <?php
+    break;
+    }
+    }
+    ?>
+</script>
 </body>
 </html>
