@@ -11,27 +11,27 @@ class registerController implements Controller
         if ($_SESSION['csrf_token'] != $_POST['csrf_token']) {
             $_SESSION['ERROR.message'] = 'درخواست شما پذیرفته نشد!';
             $_SESSION['ERROR.type'] = 'csrf';
-            header('location:localhost/Gateway/main.php');
+            header('location:../main.php');
         }
         if (!$this->nameValidation()) {
             $_SESSION['ERROR.message'] = 'نام شما به درستی وارد نشده است!';
             $_SESSION['ERROR.type'] = 'name';
-            header('location:localhost/Gateway/main.php');
+            header('location:../main.php');
         }
         if (!$this->phoneValidation()) {
             $_SESSION['ERROR.message'] = 'تلفن شما به درستی وارد نشده است!';
             $_SESSION['ERROR.type'] = 'phone';
-            header('location:localhost/Gateway/main.php');
+            header('location:../main.php');
         }
         if (!$this->ssnValidation()) {
             $_SESSION['ERROR.message'] = 'شماره ملی شما به درستی وارد نشده است!';
             $_SESSION['ERROR.type'] = 'ssn';
-            header('location:localhost/Gateway/main.php');
+            header('location:../main.php');
         }
         if (!$this->stnValidation()) {
             $_SESSION['ERROR.message'] = 'شماره دانشجویی شما به درستی وارد نشده است!';
             $_SESSION['ERROR.type'] = 'stn';
-            header('location:localhost/Gateway/main.php');
+            header('location:../main.php');
         }
     }
 
