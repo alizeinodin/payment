@@ -21,6 +21,7 @@ class stnController implements Controller
 
     public function prepare()
     {
+        header("Access-Control-Allow-Origin:*");
         if(!$this->validation()){
             echo json_encode([
                 'success' => 0,
@@ -54,7 +55,6 @@ class stnController implements Controller
         $stn = $_POST['stn'];
         if (strlen($stn) == 11) {
             if (preg_match("/^(\d\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
-                echo "OK";
                 return true;
             }
             return false;

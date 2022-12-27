@@ -1,9 +1,9 @@
 <?php
+session_start();
+
 require_once '../Model/database.php';
 require_once 'Controller.php';
-require_once 'stnController.php';
-
-session_start();
+require_once 'paymentController.php';
 
 class registerController implements Controller
 {
@@ -48,21 +48,18 @@ class registerController implements Controller
     {
         $_DB = new DB();
 
-        unset($_SESSION['ERROR.message']);
-        unset($_SESSION['ERROR.type']);
-
         if (!$this->validation()) {
             return false;
         }
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`, `payment` WHERE (ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}') and payment.user_id = user.id and payment.status = 'accepted'");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`, `pay` WHERE (ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}') and pay.user_id = user.id and pay.status = 'accepted'");
         $prepare->execute();
         $result = $prepare->rowCount();
 
         if ($result != 0) {
             $_SESSION['ERROR.message'] = 'شما قبلا ثبت نام کرده اید';
             $_SESSION['ERROR.type'] = 'global';
-            header('location:../index.php');
+            header('Location: ../index.php');
             return false;
         }
 
@@ -82,25 +79,33 @@ class registerController implements Controller
         $stn = $_POST['stn'];
         if (strlen($stn) == 11) {
             if (preg_match("/^(\d\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
-                $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted' WHERE id = '{$this->order_id}'");
+                $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted', amount = '0' WHERE id = '{$orderId}'");
                 $prepare->execute();
 
-                header("location:https://ssces.barfenow.ir/ticket.php");
+                $_SESSION['name'] = $_POST['name'];
+                $_SESSION['stn'] = $_POST['stn'];
 
+                header("location:../ticket.php");
+                return true;
             }
         } else if (strlen($stn) == 10) {
             if (preg_match("/^(\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
-                $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted' WHERE id = '{$this->order_id}'");
+                $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted', amount = '0' WHERE id = '{$orderId}'");
                 $prepare->execute();
 
-                header("location:https://ssces.barfenow.ir/ticket.php");
+                $_SESSION['name'] = $_POST['name'];
+                $_SESSION['stn'] = $_POST['stn'];
+
+                header("Location: ../ticket.php");
+
+                return true;
             }
         }
 
-        $payment = new payment();
+        $payment = new paymentController();
         $token = $payment->tokenRequest($orderId);
 
-        header("location:https://nextpay.org/nx/gateway/payment/{$token}");
+        header("Location:https://nextpay.org/nx/gateway/payment/{$token}");
         return true;
     }
 
@@ -113,9 +118,9 @@ class registerController implements Controller
         $result = $prepare->fetchAll();
         $user = $result[0];
 
-        $prepare = $_DB->pdo->prepare("INSERT INTO `payment` 
+        $prepare = $_DB->pdo->prepare("INSERT INTO `pay` 
             (`amount`, `status`, `created_at`, `user_id`)
-            VALUES ('20000', 'pending', now(), '{$user['id']}')");
+            VALUES ('1000', 'pending', now(), '{$user['id']}')");
         $prepare->execute();
         return $_DB->pdo->lastInsertId();
     }
