@@ -1,7 +1,6 @@
 <?php
 require_once '../Model/database.php';
 require_once 'Controller.php';
-$_DB = new DB();
 
 class registerController implements Controller
 {
@@ -33,6 +32,8 @@ class registerController implements Controller
 
     public function prepare()
     {
+        $_DB = new DB();
+
         unset($_SESSION['ERROR.message']);
         unset($_SESSION['ERROR.type']);
 
@@ -57,6 +58,8 @@ class registerController implements Controller
     }
 
     private function makeOrder(){
+        $_DB = new DB();
+
         $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'ssn' = '{$_POST['ssn']}'");
         $prepare->execute();
         $result = $prepare->fetchAll();
