@@ -139,7 +139,7 @@ class registerController implements Controller
     private function stnValidation()
     {
         if (isset($_POST['stn'])) {
-            if (is_string($_POST['stn'])) {
+            if (is_string($_POST['stn']) and strlen($_POST['stn']) <= 11 and strlen($_POST['stn']) >= 10) {
                 return true;
             }
             return false;
