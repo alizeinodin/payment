@@ -8,36 +8,37 @@ class stnController implements Controller
     public function validation()
     {
         if (!isset($_POST['stn'])) {
-            echo json_encode([
-                'success' => 0,
-            ]);
+            return false;
         }
         if ($this->isRegister()) {
-            echo json_encode([
-                'success' => 0
-            ]);
+            return false;
         }
         if (!$this->isSSCESStudent()){
-            echo json_encode([
-                'success' => 0
-            ]);
+            return false;
         }
+        return true;
     }
 
     public function prepare()
     {
-        $this->validation();
+        if(!$this->validation()){
+            echo json_encode([
+                'success' => 0,
+            ]);
+            return false;
+        }
 
         echo json_encode([
             'success' => 1,
         ]);
+        return true;
     }
 
     private function isRegister()
     {
         $_DB = new DB();
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'stn' = '{$_POST['stn']}");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`, `pay` WHERE stn = '{$_POST['stn']}' and pay.user_id =  user.id and pay.status = 'accepted'");
         $prepare->execute();
 
         $result = $prepare->fetchAll();
@@ -52,12 +53,13 @@ class stnController implements Controller
     {
         $stn = $_POST['stn'];
         if (strlen($stn) == 11) {
-            if (preg_match("/^(4\d\d)12358\d\d\d/gm", $stn)) {
+            if (preg_match("/^(\d\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
+                echo "OK";
                 return true;
             }
             return false;
         } else if (strlen($stn) == 10) {
-            if (preg_match("/^(\d\d)12358\d\d\d/gm", $stn)) {
+            if (preg_match("/^(\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
                 return true;
             }
             return false;

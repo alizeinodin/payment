@@ -53,7 +53,7 @@ class registerController implements Controller
             return false;
         }
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'ssn' = '{$_POST['ssn']}' OR 'phone' = '{$_POST['phone']}' OR 'stn' = '{$_POST['stn']}'");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`, `payment` WHERE (ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}') and payment.user_id = user.id and payment.status = 'accepted'");
         $prepare->execute();
         $result = $prepare->rowCount();
 
@@ -64,19 +64,27 @@ class registerController implements Controller
             return false;
         }
 
-        $prepare = $_DB->pdo->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`)
-            VALUES ('{$_POST['name']}', '{$_POST['ssn']}', '{$_POST['phone']}','{$_POST['stn']}')");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}' ");
         $prepare->execute();
+        $result = $prepare->rowCount();
+
+        if ($result == 0) {
+            $prepare = $_DB->pdo->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`)
+            VALUES ('{$_POST['name']}', '{$_POST['ssn']}', '{$_POST['phone']}','{$_POST['stn']}')");
+            $prepare->execute();
+        }
 
         $orderId = $this->makeOrder();
-        $this->tokenRequest($orderId);
+        $token = $this->tokenRequest($orderId);
 
+        header("location:https://nextpay.org/nx/gateway/payment/{$token}");
+        return true;
     }
 
     private function makeOrder()
     {
         $_DB = new DB();
-        var_dump($_POST['ssn']);
+
         $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE ssn ='{$_POST['ssn']}'");
         $prepare->execute();
         $result = $prepare->fetchAll();
@@ -108,7 +116,11 @@ class registerController implements Controller
         $response = curl_exec($curl);
         curl_close($curl);
 
-        print_r($response);
+        $res = json_decode($response);
+        if ($res['code'] == -1) {
+            return $res['trans_id'];
+        }
+        header("location:../index.php");
     }
 
     private function nameValidation()

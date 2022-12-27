@@ -32,6 +32,7 @@ $_SESSION['csrf_token'] = $token;
                     } else {
                         echo " نام وارد شده معتبر نمی باشد.";
                     }
+                    unset($_SESSION['ERROR.type']);
                 } else {
                     echo " نام وارد شده معتبر نمی باشد.";
                 }
@@ -93,35 +94,48 @@ $_SESSION['csrf_token'] = $token;
     switch ($_SESSION['ERROR.type']) {
     case 'csrf':
         echo "درخواست نامعتبر است!";
+        unset($_SESSION['ERROR.type']);
         break;
     case 'name':
+    unset($_SESSION['ERROR.type']);
+
     ?>
     showNameError();
     <?php
     break;
     case 'phone':
+    unset($_SESSION['ERROR.type']);
     ?>
     showTellError();
     <?php
+    unset($_SESSION['ERROR.type']);
     break;
     case 'ssn':
     ?>
     showNationCodeError();
     <?php
+    unset($_SESSION['ERROR.type']);
     break;
     case 'stn':
     ?>
     showStuNumberError();
     <?php
+    unset($_SESSION['ERROR.type']);
     break;
     case 'global':
-        ?>
+    ?>
     showNameError();
     <?php
-        break;
+    unset($_SESSION['ERROR.type']);
+    break;
     }
     }
     ?>
 </script>
 </body>
 </html>
+
+<?php
+unset($_SESSION['ERROR.type']);
+unset($_SESSION['ERROR.message']);
+?>
