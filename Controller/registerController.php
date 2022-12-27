@@ -69,14 +69,14 @@ class registerController implements Controller
         $prepare->execute();
 
         $orderId = $this->makeOrder();
-        $this->tokenRequest($orderId);
+        $token = $this->tokenRequest($orderId);
 
     }
 
     private function makeOrder()
     {
         $_DB = new DB();
-        var_dump($_POST['ssn']);
+
         $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE ssn ='{$_POST['ssn']}'");
         $prepare->execute();
         $result = $prepare->fetchAll();
@@ -108,7 +108,11 @@ class registerController implements Controller
         $response = curl_exec($curl);
         curl_close($curl);
 
-        print_r($response);
+        $res = json_decode($response);
+        if ($res['code'] == '-1') {
+            return $res['trans_id'];
+        }
+        header("location:../index.php");
     }
 
     private function nameValidation()
