@@ -1,13 +1,7 @@
 <?php
 
-class Controller
+interface Controller
 {
-    public function validation()
-    {
-    }
-
-    public function prepare()
-    {
-
-    }
+    public function validation();
+    public function prepare();
 }
