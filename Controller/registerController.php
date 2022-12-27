@@ -59,8 +59,8 @@ class registerController implements Controller
             VALUES ('{$_POST['name']}', '{$_POST['ssn']}', '{$_POST['phone']}','{$_POST['stn']}')");
         $prepare->execute();
 
-        $this->makeOrder();
-//        $this->tokenRequest();
+        $orderId = $this->makeOrder();
+        $this->tokenRequest($orderId);
 
     }
 
@@ -75,12 +75,12 @@ class registerController implements Controller
 
         $prepare = $_DB->pdo->prepare("INSERT INTO `payment` 
             (`amount`, `status`, `created_at`, `user_id`)
-            VALUES ('20000', 'pending', now()', '{$user['id']}')");
+            VALUES ('20000', 'pending', now(), '{$user['id']}')");
         $prepare->execute();
         return $_DB->pdo->lastInsertId();
     }
 
-    private function tokenRequest()
+    private function tokenRequest($orderId)
     {
         $curl = curl_init();
 
@@ -93,7 +93,7 @@ class registerController implements Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => 'api_key=65d94dfb-19d8-4357-bcf4-cf570abcf251&amount=20000&callback_uri=https://barfenow.ir/ssces/Controller/registerController.php',
+            CURLOPT_POSTFIELDS => 'api_key=65d94dfb-19d8-4357-bcf4-cf570abcf251&amount=20000&callback_uri=https://barfenow.ir/ssces/Controller/registerController.php&order_id={$orderId}',
         ]);
 
         $response = curl_exec($curl);
