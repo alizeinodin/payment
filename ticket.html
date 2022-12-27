@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>دریافت بلیط</title>
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/fontFaces.css" />
     <link rel="icon" href="./assets/images/logo.png" />
+    <link rel="stylesheet" href="./styles/ticket.css" />
   </head>
   <body>
     <div class="ticketContainer">
@@ -15,13 +18,19 @@
       </div>
       <div class="ticketBody">
         <div class="field">
-          <span class="title"></span><span class="value"></span>
+          <span class="title">نام</span><span class="value">اسما چگنی</span>
         </div>
         <div class="field">
-          <span class="title"></span><span class="value"></span>
+          <span class="title">شماره دانشجویی</span
+          ><span class="value">9912358015</span>
         </div>
         <div class="field">
-          <span class="title"></span><span class="value"></span>
+          <span class="title">شماره تلفن</span
+          ><span class="value">09034179326</span>
+        </div>
+        <div class="field">
+          <span class="title">تاریخ برگزاری سمینار</span
+          ><span class="value"> سه شنبه 13 دی ماه 1401</span>
         </div>
       </div>
       <div class="ticketFooter">
@@ -30,7 +39,7 @@
           <span class="line"></span>
           <span class="circle"></span>
         </div>
-        <img src="./assets/images/barcode.svg" />
+        <img id="barcode" src="./assets/images/barcode.svg" />
       </div>
     </div>
   </body>

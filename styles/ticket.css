@@ -1,0 +1,94 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #dfe0e3;
+  line-height: 24px;
+}
+.ticketContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 30vw;
+  height: 85vh;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.ticketHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: inherit;
+  height: 25vh;
+  background-color: #291143;
+  border-radius: 8px 8px 0 0;
+}
+.ticketHeader > span {
+  font-size: 18px;
+  font-family: "Vazir-Medium";
+  color: #fff;
+}
+.ticketBody {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  margin-right: 16px;
+  margin-top: 24px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+.title {
+  font-size: 16px;
+  font-family: "Vazir-Medium";
+  color: black;
+}
+.value {
+  font-size: 16px;
+  font-family: "Vazir-Regular";
+  color: #2d2d2d;
+}
+.ticketFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.effect {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.circle{
+    width: 2.5vw;
+    height: 2.5vw;
+    border-radius: 150px;
+    background-color: #dfe0e3;
+}
+.line{
+    width: 27vw;
+    height: 1px;
+    border-top-style: dashed;
+    border-top-color: #4d4d4d;
+    border-top-width: 1px;
+}
+#barcode {
+  width: 25vw;
+  height: 15vh;
+}
+@media screen and (max-width:992px){
+    .ticketContainer{
+        width: 80vw;
+    }
+    .line{
+        width: 78vw;
+    }    
+}
