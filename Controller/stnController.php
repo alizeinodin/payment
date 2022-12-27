@@ -8,17 +8,17 @@ class stnController implements Controller
     public function validation()
     {
         if (!isset($_POST['stn'])) {
-            echo json_encode([
+            return json_encode([
                 'success' => 0,
             ]);
         }
         if ($this->isRegister()) {
-            echo json_encode([
+            return json_encode([
                 'success' => 0
             ]);
         }
         if (!$this->isSSCESStudent()){
-            echo json_encode([
+            return json_encode([
                 'success' => 0
             ]);
         }
@@ -28,7 +28,8 @@ class stnController implements Controller
     {
         $this->validation();
 
-        echo json_encode([
+
+        return json_encode([
             'success' => 1,
         ]);
     }
@@ -37,7 +38,7 @@ class stnController implements Controller
     {
         $_DB = new DB();
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'stn' = '{$_POST['stn']}");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`, `pay` WHERE stn = '{$_POST['stn']}' and pay.user_id =  user.id and pay.status = 'accepted'");
         $prepare->execute();
 
         $result = $prepare->fetchAll();
@@ -52,12 +53,12 @@ class stnController implements Controller
     {
         $stn = $_POST['stn'];
         if (strlen($stn) == 11) {
-            if (preg_match("/^(4\d\d)12358\d\d\d/gm", $stn)) {
+            if (preg_match("/^(\d\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
                 return true;
             }
             return false;
         } else if (strlen($stn) == 10) {
-            if (preg_match("/^(\d\d)12358\d\d\d/gm", $stn)) {
+            if (preg_match("/^(\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
                 return true;
             }
             return false;
