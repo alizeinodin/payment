@@ -53,7 +53,7 @@ class registerController implements Controller
             return false;
         }
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'ssn' = '{$_POST['ssn']}' OR 'phone' = '{$_POST['phone']}' OR 'stn' = '{$_POST['stn']}'");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE ssn = '{$_POST['ssn']}' OR phone = '{$_POST['phone']}' OR stn = '{$_POST['stn']}'");
         $prepare->execute();
         $result = $prepare->rowCount();
 
