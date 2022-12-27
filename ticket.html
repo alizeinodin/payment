@@ -14,8 +14,11 @@
   <body>
     <div class="ticketContainer">
       <div class="ticketHeader">
-        <img src="./assets/images/logo.png" width="73px" height="96px" />
-        <span>بلیط حضور در سمینار</span>
+        <img src="./assets/images/logo.png" width="114px" height="150px" />
+        <div class="text">
+          <span id="text1">بلیط حضور در سمینار</span>
+          <span id="text2">سمینار تخصصی فرانت اند</span>
+        </div>
       </div>
       <div class="ticketBody">
         <div class="field">
@@ -26,12 +29,12 @@
           ><span class="value">9912358015</span>
         </div>
         <div class="field">
-          <span class="title">شماره تلفن</span
-          ><span class="value">09034179326</span>
-        </div>
-        <div class="field">
           <span class="title">تاریخ برگزاری سمینار</span
           ><span class="value"> سه شنبه 13 دی ماه 1401</span>
+        </div>
+        <div class="field">
+          <span class="title">محل برگزاری سمینار</span
+          ><span class="value">دانشکده مهندسی، سالن آمفی تئاتر</span>
         </div>
       </div>
       <div class="ticketFooter">
