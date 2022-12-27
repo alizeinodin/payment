@@ -66,3 +66,6 @@ class stnController implements Controller
 
     }
 }
+
+$exe = new stnController();
+$exe->prepare();
