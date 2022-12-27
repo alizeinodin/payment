@@ -1,6 +1,7 @@
 <?php
 require_once '../Model/database.php';
 require_once 'Controller.php';
+$_DB = new DB();
 
 class registerController implements Controller
 {
@@ -37,7 +38,6 @@ class registerController implements Controller
 
 //        $this->validation();
 
-        $_DB = new DB();
         $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE `ssn` = '{$_POST['ssn']}' OR `phone` = '{$_POST['phone']}' OR `stn` = '{$_POST['stn']}'");
         $prepare->execute();
         $result = $prepare->fetchAll();
