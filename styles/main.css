@@ -9,7 +9,7 @@ body {
 }
 .main {
   width: 100vw;
-  height: 80vh;
+  height: 85vh;
   display: flex;
   flex-direction: row;
 }
@@ -72,41 +72,67 @@ canvas {
   position: absolute;
   top: 0;
 }
+.creator,
+.link {
+  z-index: 1002;
+  align-self: center;
+  padding-top: 32px;
+  font-size: 12px;
+  color: #fdfdfd;
+  font-family: "Vazir-Regular";
+}
+.link {
+  text-decoration: none;
+}
 .footer {
   width: 100vw;
-  height: 20vh;
+  height: 15vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-content: center;
 }
 #bgFooter1 {
-  position: absolute;
   width: 100vw;
-  height: 40vh;
-  bottom: -10;
+  position: absolute;
   background-color: #291143;
-  transform: rotate(2deg);
   z-index: 1000;
+  height: 15vh;
+  bottom: 0;
 }
 #bgFooter2 {
   position: absolute;
-  width: 100vw;
-  height: 20vh;
-  bottom: -11;
-  margin: -16px;
+  bottom: 0;
   background-color: #746688;
-  transform: rotate(-2deg);
+  z-index: 999;
+  height: 15vh;
+  width: 100vw;
+}
+#bgFooter2-border {
+  box-sizing: padding-box;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-left: 50vw solid transparent;
+  border-right: 50vw solid #746688;
+  border-bottom: 40px solid #746688;
+  position: absolute;
+  bottom: 15vh;
   z-index: 999;
 }
-.creator,.link{
-  z-index: 1002;
- align-self: center; 
- padding-top: 48px;
-font-size: 16px;
-color: #fff;
-font-family: "Vazir-Medium";
-}
-.link{
-  text-decoration: none;
+#bgFooter1-border {
+  box-sizing: padding-box;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-right: 50vw solid transparent;
+  border-left: 50vw solid #291143;
+  border-bottom: 40px solid #291143;
+  position: absolute;
+  bottom: 15vh;
+  z-index: 1000;
 }
