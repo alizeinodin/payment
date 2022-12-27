@@ -20,10 +20,10 @@ $_SESSION['csrf_token'] = $token;
 <body>
 <div class="main">
     <form action="Controller/registerController.php" method="post">
-            <span id="title">ثبت نام در سمینار</span>
-            <input type="hidden" name="csrf_token" value="<?php echo $token; ?>">
-            <input type="text" name="name" placeholder="نام نام خانوادگی"/>
-            <span class="error" id="name">
+        <span id="title">ثبت نام در سمینار</span>
+        <input type="hidden" name="csrf_token" value="<?php echo $token; ?>">
+        <input type="text" name="name" placeholder="نام نام خانوادگی"/>
+        <span class="error" id="name">
                 <?php
                 if (isset($_SESSION['ERROR.type'])) {
                     if ($_SESSION['ERROR.type'] == 'global') {
@@ -31,34 +31,33 @@ $_SESSION['csrf_token'] = $token;
                     } else {
                         echo " نام وارد شده معتبر نمی باشد.";
                     }
-                    unset($_SESSION['ERROR.type']);
                 } else {
                     echo " نام وارد شده معتبر نمی باشد.";
                 }
 
                 ?>
                </span>
-            <input type="text" name="ssn" placeholder="کد ملی"/>
-            <span class="error" id="nationcode"
-            >کد ملی وارد شده معتبر نمی باشد.</span
-            >
-            <input type="text" name="stn" placeholder="شماره دانشجویی"/>
-            <span class="error" id="stunumber"
-            >شماره دانشجویی وارد شده معتبر نمی باشد.</span
-            >
-            <input type="text" name="phone" placeholder="َشماره تلفن همراه"/>
-            <span class="error" id="tell"
-            >شماره تلفن وارد شده معتبر نمی باشد.</span
-            >
-            <span id="note"
-            >‌در صورتی که دانشجو کامپیوتر دانشگاه بوعلی سینا هستید با وارد کردن
+        <input type="text" name="ssn" placeholder="کد ملی"/>
+        <span class="error" id="nationcode"
+        >کد ملی وارد شده معتبر نمی باشد.</span
+        >
+        <input type="text" name="stn" placeholder="شماره دانشجویی"/>
+        <span class="error" id="stunumber"
+        >شماره دانشجویی وارد شده معتبر نمی باشد.</span
+        >
+        <input type="text" name="phone" placeholder="َشماره تلفن همراه"/>
+        <span class="error" id="tell"
+        >شماره تلفن وارد شده معتبر نمی باشد.</span
+        >
+        <span id="note"
+        >‌در صورتی که دانشجو کامپیوتر دانشگاه بوعلی سینا هستید با وارد کردن
             شماره دانشجویی ثبت نام برای شما رایگان می شود.</span
-            >
-            <div class="btn">
-                <input type="submit" value="ثبت نام و پرداخت"/>
-                <span id="price">مبلغ: 20,000 تومان</span>
-            </div>
-        </form>
+        >
+        <div class="btn">
+            <input type="submit" value="ثبت نام و پرداخت"/>
+            <span id="price">مبلغ: 20,000 تومان</span>
+        </div>
+    </form>
     <div class="infoContainer">
         <canvas></canvas>
         <div class="content">
@@ -88,45 +87,31 @@ $_SESSION['csrf_token'] = $token;
 <script src="./scripts/main.js"></script>
 <script>
     <?php
-    if (isset($_SESSION['ERROR.type'])) {
     switch ($_SESSION['ERROR.type']) {
     case 'csrf':
         echo "درخواست نامعتبر است!";
-        unset($_SESSION['ERROR.type']);
         break;
-    case 'name':
-    unset($_SESSION['ERROR.type']);
+    case 'global': case 'name':
 
     ?>
     showNameError();
     <?php
     break;
     case 'phone':
-    unset($_SESSION['ERROR.type']);
     ?>
     showTellError();
     <?php
-    unset($_SESSION['ERROR.type']);
     break;
     case 'ssn':
     ?>
     showNationCodeError();
     <?php
-    unset($_SESSION['ERROR.type']);
     break;
     case 'stn':
     ?>
     showStuNumberError();
     <?php
-    unset($_SESSION['ERROR.type']);
     break;
-    case 'global':
-    ?>
-    showNameError();
-    <?php
-    unset($_SESSION['ERROR.type']);
-    break;
-    }
     }
     ?>
 </script>
