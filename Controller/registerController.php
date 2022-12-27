@@ -14,5 +14,21 @@ class registerController implements Controller
     {
         $this->validation();
     }
+
+    private function nameValidation()
+    {
+        if (isset($_POST['name']) and is_string($_POST['name'])) {
+            return true;
+        }
+        return false;
+    }
+
+    private function ssnValidation()
+    {
+        if (isset($_POST['ssn']) and strlen($_POST['ssn'] == 10)) {
+            return true;
+        }
+        return false;
+    }
 }
 
