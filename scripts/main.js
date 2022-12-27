@@ -16,12 +16,15 @@ const showTellError = () => {
   tell.style.display = "block";
 };
 
-inputs[2].addEventListener("keydown", () => {
+inputs[2].addEventListener("keydown", async () => {
+  console.log(typeof inputs[2].value);
   if (inputs[2].value.length >= 9) {
-     fetch("../Controller/stnController", {
-      stn: inputs[2].value,
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    let data = { stn: inputs[2].value };
+    const xhttp = new XMLHttpRequest();
+    xhttp.open(
+      "POST",
+      "https://ssces.barfenow.ir/Controller/stnController.php",
+    );
+    xhttp.send(JSON.stringify(data));
   }
 });

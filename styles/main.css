@@ -39,6 +39,8 @@ p {
   line-height: 24px;
   word-wrap: break-word;
   width: 48vh;
+  text-align: center;
+  margin-bottom: 8px;
 }
 h2 {
   margin-top: 24px;
@@ -197,13 +199,20 @@ canvas {
 }
 
 @media screen and (max-width: 992px) {
+  body {
+    
+    overflow: hidden;
+  }
   .main {
     width: 100vw;
     height: 93vh;
     display: flex;
     flex-direction: column-reverse;
   }
-  .footer{
+  #bgFooter1-border,
+  #bgFooter2-border,
+  #bgFooter1,
+  #bgFooter2 {
     display: none;
   }
   .infoContainer {
@@ -229,7 +238,16 @@ canvas {
   input {
     height: 64px;
     width: 80vw;
+    font-size: 20px;
+    scale: 1.15;
+  }
+  input[type="submit"]{
+    font-size: 20px;
+    width: 60%;
+  }
+  #price{
     font-size: 18px;
+    width: 60%;
   }
   p {
     line-height: 24px;
@@ -243,4 +261,22 @@ canvas {
     top: 0;
     height: 30vh;
   }
+  .creator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    height: 50px;
+    background-color: #291143;
+  }
+  #title{
+    font-size: 41px;
+  }
+  #note{
+    font-size: 24px;
+    width: 70%;
+    line-height: 30px;
+  } 
+  
 }
