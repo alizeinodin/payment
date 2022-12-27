@@ -11,6 +11,22 @@ class registerController implements Controller
             $_SESSION['ERROR.message'] = 'درخواست شما پذیرفته نشد!';
             $_SESSION['ERROR.type'] = 'csrf';
         }
+        if (!$this->nameValidation()) {
+            $_SESSION['ERROR.message'] = 'نام شما به درستی وارد نشده است!';
+            $_SESSION['ERROR.type'] = 'name';
+        }
+        if (!$this->phoneValidation()) {
+            $_SESSION['ERROR.message'] = 'تلفن شما به درستی وارد نشده است!';
+            $_SESSION['ERROR.type'] = 'phone';
+        }
+        if (!$this->ssnValidation()) {
+            $_SESSION['ERROR.message'] = 'شماره ملی شما به درستی وارد نشده است!';
+            $_SESSION['ERROR.type'] = 'ssn';
+        }
+        if (!$this->stnValidation()) {
+            $_SESSION['ERROR.message'] = 'شماره دانشجویی شما به درستی وارد نشده است!';
+            $_SESSION['ERROR.type'] = 'stn';
+        }
     }
 
     public function prepare()
