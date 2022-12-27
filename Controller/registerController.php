@@ -42,5 +42,18 @@ class registerController implements Controller
         }
         return false;
     }
+
+    private function stnValidation()
+    {
+        if (isset($_POST['stn']))
+        {
+            if (is_string($_POST['stn'])) {
+                return true;
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
 
