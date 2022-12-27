@@ -14,7 +14,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   width: 30vw;
-  height: 85vh;
+  height: 75vh;
   background-color: #fff;
   border-radius: 8px;
 }
@@ -25,32 +25,60 @@ body {
   justify-content: space-evenly;
   width: inherit;
   height: 25vh;
+  background: radial-gradient(
+      circle at top,
+      transparent 60%,
+      #341d4c 61%,
+      #341d4c 66%,
+      transparent 67%
+    ),
+    radial-gradient(
+      circle at bottom,
+      transparent 60%,
+      #341d4c 61%,
+      #341d4c 66%,
+      transparent 67%
+    ),
+    radial-gradient(
+      circle at left,
+      transparent 60%,
+      #341d4c 61%,
+      #341d4c 66%,
+      transparent 67%
+    ),
+    radial-gradient(
+      circle at right,
+      transparent 60%,
+      #341d4c 61%,
+      #341d4c 66%,
+      transparent 67%
+    );
+  background-size: 3em 3em;
   background-color: #291143;
+  opacity: 1;
   border-radius: 8px 8px 0 0;
   -webkit-print-color-adjust: exact !important;
   print-color-adjust: exact !important;
-}
-.ticketHeader > span {
-  font-size: 18px;
-  font-family: "Vazir-Medium";
-  color: #fff;
 }
 .ticketBody {
   display: flex;
   flex-direction: column;
   text-align: right;
+  align-items: flex-start;
   margin-right: 16px;
   margin-top: 24px;
 }
 .field {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom: 12px;
+  justify-content: space-evenly;
 }
 .title {
   font-size: 16px;
   font-family: "Vazir-Medium";
   color: black;
+  margin-left: 12px;
 }
 .value {
   font-size: 16px;
@@ -104,4 +132,20 @@ body {
   font-family: "Vazir-Medium";
   border: none;
   border-radius: 8px;
+}
+.text{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#text1{
+  font-size: 14px;
+  font-family: "Vazir-Regular";
+  color: #fff;
+}
+#text2{
+  font-size: 22px;
+  font-family: "Vazir-Medium";
+  margin-top: 16px;
+  color: #fff;
 }
