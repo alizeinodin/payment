@@ -76,22 +76,26 @@ class registerController implements Controller
             $prepare->execute();
         }
 
+        $orderId = $this->makeOrder();
+
         // bu ali computer student and check free register
         $stn = $_POST['stn'];
         if (strlen($stn) == 11) {
             if (preg_match("/^(\d\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
+                $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted' WHERE id = '{$this->order_id}'");
+                $prepare->execute();
 
-                return true;
+                header("location:https://ssces.barfenow.ir/ticket.php");
+
             }
-            return false;
         } else if (strlen($stn) == 10) {
             if (preg_match("/^(\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
-                return true;
-            }
-            return false;
-        }
+                $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted' WHERE id = '{$this->order_id}'");
+                $prepare->execute();
 
-        $orderId = $this->makeOrder();
+                header("location:https://ssces.barfenow.ir/ticket.php");
+            }
+        }
 
         $payment = new payment();
         $token = $payment->tokenRequest($orderId);
