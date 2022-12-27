@@ -14,3 +14,5 @@ const showStuNumberError = () => {
 const showTellError = () => {
   tell.style.display = "block";
 };
+
+let result=await fetch("../Controller/stnController")
