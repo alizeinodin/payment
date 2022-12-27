@@ -46,7 +46,7 @@ $_SESSION['csrf_token'] = $token;
             <span class="error" id="stunumber"
             >شماره دانشجویی وارد شده معتبر نمی باشد.</span
             >
-            <input type="tel" name="phone" placeholder="َشماره تلفن همراه"/>
+            <input type="text" name="phone" placeholder="َشماره تلفن همراه"/>
             <span class="error" id="tell"
             >شماره تلفن وارد شده معتبر نمی باشد.</span
             >

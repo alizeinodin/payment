@@ -49,7 +49,7 @@ class registerController implements Controller
         unset($_SESSION['ERROR.message']);
         unset($_SESSION['ERROR.type']);
 
-        if (!$this->validation()){
+        if (!$this->validation()) {
             return false;
         }
 
@@ -121,7 +121,7 @@ class registerController implements Controller
 
     private function ssnValidation()
     {
-        if (isset($_POST['ssn']) and strlen($_POST['ssn'] == 10)) {
+        if (isset($_POST['ssn']) and strlen($_POST['ssn']) == 10) {
             return true;
         }
         return false;
@@ -130,7 +130,7 @@ class registerController implements Controller
     private function phoneValidation()
     {
         if (isset($_POST['phone']) and
-            preg_match("/09([0-9][0-9])-?[0-9]{3}-?[0-9]{4}/gm", $_POST['phone'])) {
+            strlen($_POST['phone']) == 11) {
             return true;
         }
         return false;
