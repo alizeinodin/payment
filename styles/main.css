@@ -5,7 +5,8 @@ body {
   justify-content: flex-start;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .main {
   width: 100vw;
@@ -104,6 +105,7 @@ input[type="submit"] {
   align-items: center;
   justify-content: space-between;
   width: 320px;
+  margin-bottom: 48px;
 }
 #price {
   width: 160px;
@@ -112,7 +114,7 @@ input[type="submit"] {
   color: #291143;
 }
 canvas {
-  width: 50vw;
+  width: 48vw;
   z-index: 1000;
   position: absolute;
   top: 0;
@@ -180,4 +182,25 @@ canvas {
   position: absolute;
   bottom: 7vh;
   z-index: 1000;
+}
+
+@media screen and (max-width: 992px) {
+
+  .main {
+    width: 100vw;
+    height: 93vh;
+    display: flex;
+    flex-direction:column-reverse;
+    overflow: auto;
+
+  }
+  .infoContainer{
+    width: 100vw;
+    height: 50vh;
+  }
+  .formContainer{
+    width: 100vw;
+    height: 50vh;
+    overflow: auto;
+  }
 }
