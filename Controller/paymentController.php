@@ -26,16 +26,18 @@ class paymentController implements Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => "api_key=65d94dfb-19d8-4357-bcf4-cf570abcf251&amount=20000&callback_uri={$this->callback_uri}&order_id={$orderId}",
+            CURLOPT_POSTFIELDS => "api_key=65d94dfb-19d8-4357-bcf4-cf570abcf251&amount=1000&callback_uri={$this->callback_uri}&order_id={$orderId}",
         ]);
 
         $response = curl_exec($curl);
         curl_close($curl);
 
         $res = json_decode($response);
-        if ($res['code'] == -1) {
-            return $res['trans_id'];
+
+        if ($res->code == -1) {
+            return $res->trans_id;
         }
+
         header("location:../index.php");
     }
 
@@ -46,7 +48,7 @@ class paymentController implements Controller
 
     public function validation()
     {
-        if ($this->res['code'] != 0) {
+        if ($this->res->code != 0) {
             return false;
         }
         return true;
@@ -61,20 +63,22 @@ class paymentController implements Controller
         $this->order_id = $_GET['order_id'];
         $this->amount = $_GET['amount'];
 
+
         $this->updateTransOfPay();
 
         $this->acceptTrans();
 
         if (!$this->validation()) {
+            echo "پرداخت ناموفق بود :) لطفا دوباره تلاش کنید";
             die("پرداخت ناموفق بود. لطفا دوباره تلاش کنید!");
         }
 
         $_DB = new DB();
 
-        $prepare = $_DB->pdo->prepare("UPDATE `pay` set card_holder = '{$this->res['card_holder']}',
-                 customer_phone = '{$this->res['customer_phone']}',
-                 Shaparak_Ref_Id = '{$this->res['Shaparak_Ref_Id']}',
-                 trans_created_at = '{$this->res['created_at']}',
+        $prepare = $_DB->pdo->prepare("UPDATE `pay` set card_holder = '{$this->res->card_holder}',
+                 customer_phone = '{$this->res->customer_phone}',
+                 Shaparak_Ref_Id = '{$this->res->Shaparak_Ref_Id}',
+                 trans_created_at = '{$this->res->created_at}',
                  status = 'accepted' WHERE id = '{$this->order_id}'");
         $prepare->execute();
 
@@ -96,7 +100,7 @@ class paymentController implements Controller
     {
         $_DB = new DB();
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `pay` WHERE id = {$this->order_id} and trans_id = {$this->trans_id}");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `pay` WHERE id = '{$this->order_id}' and trans_id = '{$this->trans_id}'");
         $prepare->execute();
         $res = $prepare->fetchAll();
 
@@ -133,3 +137,6 @@ class paymentController implements Controller
 
     }
 }
+
+$exc = new paymentController();
+$exc->prepare();
