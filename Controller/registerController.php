@@ -49,9 +49,6 @@ class registerController implements Controller
     {
         $_DB = new DB();
 
-        unset($_SESSION['ERROR.message']);
-        unset($_SESSION['ERROR.type']);
-
         if (!$this->validation()) {
             return false;
         }
@@ -83,7 +80,7 @@ class registerController implements Controller
         $stn = $_POST['stn'];
         if (strlen($stn) == 11) {
             if (preg_match("/^(\d\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
-                $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted' WHERE id = '{$this->order_id}'");
+                $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted', amount = '0' WHERE id = '{$orderId}'");
                 $prepare->execute();
 
                 $_SESSION['name'] = $_POST['name'];
@@ -94,7 +91,7 @@ class registerController implements Controller
             }
         } else if (strlen($stn) == 10) {
             if (preg_match("/^(\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
-                $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted' WHERE id = '{$this->order_id}'");
+                $prepare = $_DB->pdo->prepare("UPDATE `pay` set status = 'accepted', amount = '0' WHERE id = '{$orderId}'");
                 $prepare->execute();
 
                 $_SESSION['name'] = $_POST['name'];
