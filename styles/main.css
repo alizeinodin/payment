@@ -9,12 +9,12 @@ body {
 }
 .main {
   width: 100vw;
-  height: 85vh;
+  height: 93vh;
   display: flex;
   flex-direction: row;
 }
 .infoContainer {
-  width: 40vw;
+  width: 50vw;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -35,17 +35,41 @@ body {
 }
 p {
   line-height: 24px;
+  word-wrap: break-word;
+  width: 48vh;
 }
 h2 {
   margin-top: 24px;
   margin-bottom: 24px;
 }
+.formContainer {
+  margin-top: 32px;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#title {
+  font-size: 20px;
+  padding-bottom: 12px;
+  font-family: "Vazir-Bold";
+}
 form {
-  width: 60vw;
+  width: 50vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+#note {
+  font-size: 15px;
+  font-family: "Vazir-Regular";
+  line-height: 20px;
+  color: #a22d14;
+  margin-top: 8px;
+  width: 316px;
+  word-wrap: break-word;
+  text-align: right;
 }
 input {
   width: 320px;
@@ -65,9 +89,30 @@ input[type="submit"] {
   background-color: #291143;
   color: #fff;
   cursor: pointer;
+  width: 160px;
+}
+.error {
+  display: none;
+  font-size: 14px;
+  font-family: "Vazir-Regular";
+  color: red;
+}
+.btn {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 320px;
+}
+#price {
+  width: 160px;
+  font-size: 16px;
+  font-family: "Vazir-Regular";
+  color: #291143;
 }
 canvas {
-  width: 40vw;
+  width: 50vw;
   z-index: 1000;
   position: absolute;
   top: 0;
@@ -76,7 +121,7 @@ canvas {
 .link {
   z-index: 1002;
   align-self: center;
-  padding-top: 32px;
+  padding-top: 8px;
   font-size: 12px;
   color: #fdfdfd;
   font-family: "Vazir-Regular";
@@ -86,7 +131,7 @@ canvas {
 }
 .footer {
   width: 100vw;
-  height: 15vh;
+  height: 7vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -97,7 +142,7 @@ canvas {
   position: absolute;
   background-color: #291143;
   z-index: 1000;
-  height: 15vh;
+  height: 7vh;
   bottom: 0;
 }
 #bgFooter2 {
@@ -105,7 +150,7 @@ canvas {
   bottom: 0;
   background-color: #746688;
   z-index: 999;
-  height: 15vh;
+  height: 7vh;
   width: 100vw;
 }
 #bgFooter2-border {
@@ -119,7 +164,7 @@ canvas {
   border-right: 50vw solid #746688;
   border-bottom: 40px solid #746688;
   position: absolute;
-  bottom: 15vh;
+  bottom: 7vh;
   z-index: 999;
 }
 #bgFooter1-border {
@@ -133,6 +178,6 @@ canvas {
   border-left: 50vw solid #291143;
   border-bottom: 40px solid #291143;
   position: absolute;
-  bottom: 15vh;
+  bottom: 7vh;
   z-index: 1000;
 }
