@@ -1,10 +1,9 @@
 <?php
+session_start();
+
 require_once '../Model/database.php';
 require_once 'Controller.php';
-require_once 'stnController.php';
 require_once 'paymentController.php';
-
-session_start();
 
 class registerController implements Controller
 {
@@ -60,7 +59,7 @@ class registerController implements Controller
         if ($result != 0) {
             $_SESSION['ERROR.message'] = 'شما قبلا ثبت نام کرده اید';
             $_SESSION['ERROR.type'] = 'global';
-            header('location:../index.php');
+            header('Location: ../index.php');
             return false;
         }
 
@@ -97,7 +96,7 @@ class registerController implements Controller
                 $_SESSION['name'] = $_POST['name'];
                 $_SESSION['stn'] = $_POST['stn'];
 
-                header("location:../ticket.php");
+                header("Location: ../ticket.php");
 
                 return true;
             }
@@ -106,7 +105,7 @@ class registerController implements Controller
         $payment = new paymentController();
         $token = $payment->tokenRequest($orderId);
 
-        header("location:https://nextpay.org/nx/gateway/payment/{$token}");
+        header("Location:https://nextpay.org/nx/gateway/payment/{$token}");
         return true;
     }
 
@@ -121,7 +120,7 @@ class registerController implements Controller
 
         $prepare = $_DB->pdo->prepare("INSERT INTO `pay` 
             (`amount`, `status`, `created_at`, `user_id`)
-            VALUES ('20000', 'pending', now(), '{$user['id']}')");
+            VALUES ('1000', 'pending', now(), '{$user['id']}')");
         $prepare->execute();
         return $_DB->pdo->lastInsertId();
     }
