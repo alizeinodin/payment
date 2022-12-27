@@ -36,7 +36,7 @@ class registerController implements Controller
 
         $this->validation();
 
-        $prepare = $_DB->prepare("SELECT * FROM user WHERE ssn = {$_POST['ssn']} OR phone = {$_POST['phone']} OR stn = {$_POST['stn']}");
+        $prepare = $_DB->prepare("SELECT * FROM `user` WHERE ssn = {$_POST['ssn']} OR phone = {$_POST['phone']} OR stn = {$_POST['stn']}");
         $prepare->execute();
         $result = $prepare->fetchAll();
 
@@ -44,6 +44,10 @@ class registerController implements Controller
             $_SESSION['ERROR.message'] = 'شما قبلا ثبت نام کرده اید';
             $_SESSION['ERROR.type'] = 'global';
         }
+
+        $prepare = $_DB->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`) 
+            VALUES ({$_POST['name']}, {$_POST['ssn']}, {$_POST['phone']},'{$_POST['stn']}')");
+        $prepare->execute();
     }
 
     private function nameValidation()
@@ -73,8 +77,7 @@ class registerController implements Controller
 
     private function stnValidation()
     {
-        if (isset($_POST['stn']))
-        {
+        if (isset($_POST['stn'])) {
             if (is_string($_POST['stn'])) {
                 return true;
             }

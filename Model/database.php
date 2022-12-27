@@ -24,8 +24,7 @@ class DB
 
     public function __destruct()
     {
-        if ($this->pdo != null)
-        {
+        if ($this->pdo != null) {
             $this->pdo = null;
         }
     }
