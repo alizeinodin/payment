@@ -40,10 +40,10 @@ class registerController implements Controller
     {
         $_DB = new DB();
 
-//        unset($_SESSION['ERROR.message']);
-//        unset($_SESSION['ERROR.type']);
+        unset($_SESSION['ERROR.message']);
+        unset($_SESSION['ERROR.type']);
 
-        $this->validation();
+//        $this->validation();
 
         $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'ssn' = '{$_POST['ssn']}' OR 'phone' = '{$_POST['phone']}' OR 'stn' = '{$_POST['stn']}'");
         $prepare->execute();
@@ -52,6 +52,7 @@ class registerController implements Controller
         if ($result != 0) {
             $_SESSION['ERROR.message'] = 'شما قبلا ثبت نام کرده اید';
             $_SESSION['ERROR.type'] = 'global';
+            die(header('location:../main.php'));
         }
 
         $prepare = $_DB->pdo->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`)
@@ -67,11 +68,16 @@ class registerController implements Controller
     {
         $_DB = new DB();
         var_dump($_POST['ssn']);
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'ssn'='{$_POST['ssn']}'");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE ssn ='{$_POST['ssn']}'");
         $prepare->execute();
         $result = $prepare->fetchAll();
+        $user = $result[0];
 
-        var_dump($result);
+        $prepare = $_DB->pdo->prepare("INSERT INTO `payment` 
+            (`amount`, `status`, `created_at`, `user_id`)
+            VALUES ('20000', 'pending', now()', '{$user['id']}')");
+        $prepare->execute();
+        return $_DB->pdo->lastInsertId();
     }
 
     private function tokenRequest()
