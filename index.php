@@ -132,8 +132,3 @@ $_SESSION['csrf_token'] = $token;
 </script>
 </body>
 </html>
-
-<?php
-unset($_SESSION['ERROR.type']);
-unset($_SESSION['ERROR.message']);
-?>
