@@ -77,7 +77,7 @@ body {
 .title {
   font-size: 16px;
   font-family: "Vazir-Medium";
-  color: black;
+  color: #341d4c;
   margin-left: 12px;
 }
 .value {
@@ -114,14 +114,6 @@ body {
   width: 25vw;
   height: 15vh;
 }
-@media screen and (max-width: 992px) {
-  .ticketContainer {
-    width: 80vw;
-  }
-  .line {
-    width: 78vw;
-  }
-}
 #printbtn {
   margin-top: 12px;
   width: 30vw;
@@ -148,4 +140,25 @@ body {
   font-family: "Vazir-Medium";
   margin-top: 16px;
   color: #fff;
+}
+@media screen and (max-width: 992px) {
+  .ticketContainer {
+    width: 80vw;
+  }
+  .line {
+    width: 76vw;
+  }
+  .circle {
+    width: 5vw;
+    height: 5vw;
+    border-radius: 2.5vw;
+    background-color: #dfe0e3;
+  }
+  .title,.value{
+    font-size: 12px;
+  }
+  #barcode{
+    width: 75vw;
+  height: 15vh;
+  }
 }
