@@ -127,11 +127,22 @@ canvas {
   align-self: center;
   padding-top: 8px;
   font-size: 12px;
-  color: #fdfdfd;
+  color: #f0f0f0;
   font-family: "Vazir-Regular";
+  opacity: 0.7;
 }
 .link {
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  justify-content: space-between;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+.link > span{
+  margin-left: 10px;
 }
 .footer {
   width: 100vw;
