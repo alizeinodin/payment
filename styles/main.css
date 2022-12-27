@@ -135,7 +135,7 @@ canvas {
 }
 .footer {
   width: 100vw;
-  height: 7vh;
+  height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -146,7 +146,7 @@ canvas {
   position: absolute;
   background-color: #291143;
   z-index: 1000;
-  height: 7vh;
+  height: 80px;
   bottom: 0;
 }
 #bgFooter2 {
@@ -154,7 +154,7 @@ canvas {
   bottom: 0;
   background-color: #746688;
   z-index: 999;
-  height: 7vh;
+  height: 80px;
   width: 100vw;
 }
 #bgFooter2-border {
@@ -164,11 +164,11 @@ canvas {
   width: 0;
   height: 0;
   border-top: 40px solid transparent;
-  border-left: 50vw solid transparent;
-  border-right: 50vw solid #746688;
+  border-left: 40vw solid transparent;
+  border-right: 40vw solid #746688;
   border-bottom: 40px solid #746688;
   position: absolute;
-  bottom: 7vh;
+  bottom: 80px;
   z-index: 999;
 }
 #bgFooter1-border {
@@ -182,7 +182,7 @@ canvas {
   border-left: 50vw solid #291143;
   border-bottom: 40px solid #291143;
   position: absolute;
-  bottom: 7vh;
+  bottom: 80px;
   z-index: 1000;
 }
 @keyframes formAnim {
@@ -202,6 +202,9 @@ canvas {
     height: 93vh;
     display: flex;
     flex-direction: column-reverse;
+  }
+  .footer{
+    display: none;
   }
   .infoContainer {
     width: 100vw;
@@ -223,7 +226,7 @@ canvas {
     align-items: center;
     justify-content: center;
   }
-  input{
+  input {
     height: 64px;
     width: 80vw;
     font-size: 18px;

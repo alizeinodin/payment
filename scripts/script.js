@@ -89,8 +89,7 @@ function init() {
         Math.random() * 80
       )
     );
-  }
-  console.log(particles);
+      }
 }
 
 // Animation Loop
