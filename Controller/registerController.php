@@ -49,7 +49,7 @@ class registerController implements Controller
         }
 
         $prepare = $_DB->pdo->prepare("INSERT INTO `user` (`name`, `ssn`, `phone`, `stn`)
-            VALUES ({$_POST['name']}, {$_POST['ssn']}, {$_POST['phone']},'{$_POST['stn']}')");
+            VALUES ('{$_POST['name']}', '{$_POST['ssn']}', '{$_POST['phone']}','{$_POST['stn']}')");
         $prepare->execute();
 
         $this->makeOrder();
@@ -57,10 +57,11 @@ class registerController implements Controller
 
     }
 
-    private function makeOrder(){
+    private function makeOrder()
+    {
         $_DB = new DB();
 
-        $prepare = $_DB->pdo->prepare("SELECT * FROM `user` WHERE 'ssn' = '{$_POST['ssn']}'");
+        $prepare = $_DB->pdo->prepare("SELECT * FROM `user`");
         $prepare->execute();
         $result = $prepare->fetchAll();
 
