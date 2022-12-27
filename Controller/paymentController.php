@@ -46,7 +46,7 @@ class payment implements Controller
 
     public function validation()
     {
-        if($this->res['code'] != 0) {
+        if ($this->res['code'] != 0) {
             return false;
         }
         return true;
@@ -54,6 +54,9 @@ class payment implements Controller
 
     public function prepare()
     {
+        if (!isset($_GET['trans_id']) or !isset($_GET['order_id']) or !isset($_GET['amount'])) {
+            return false;
+        }
         $this->trans_id = $_GET['trans_id'];
         $this->order_id = $_GET['order_id'];
         $this->amount = $_GET['amount'];
@@ -85,7 +88,6 @@ class payment implements Controller
         $_SESSION['stn'] = $user['stn'];
 
         header("location:https://ssces.barfenow.ir/ticket.php");
-
 
 
     }

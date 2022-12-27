@@ -77,13 +77,24 @@ class registerController implements Controller
         }
 
         // bu ali computer student and check free register
-        $stnCnt = new stnController();
-        if($stnCnt->prepare()) {
+        $stn = $_POST['stn'];
+        if (strlen($stn) == 11) {
+            if (preg_match("/^(\d\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
 
+                return true;
+            }
+            return false;
+        } else if (strlen($stn) == 10) {
+            if (preg_match("/^(\d\d)[1][2][3][5][8](\d\d\d)/", $stn)) {
+                return true;
+            }
+            return false;
         }
 
         $orderId = $this->makeOrder();
-        $token = $this->tokenRequest($orderId);
+
+        $payment = new payment();
+        $token = $payment->tokenRequest($orderId);
 
         header("location:https://nextpay.org/nx/gateway/payment/{$token}");
         return true;
