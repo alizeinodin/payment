@@ -50,6 +50,28 @@ class registerController implements Controller
         $prepare->execute();
     }
 
+    private function tokenRequest()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => 'https://nextpay.org/nx/gateway/token',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => 'api_key=65d94dfb-19d8-4357-bcf4-cf570abcf251&amount=20000&callback_uri=https://yourWebsite.com/callback',
+        ]);
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        var_dump($response);
+    }
+
     private function nameValidation()
     {
         if (isset($_POST['name']) and is_string($_POST['name'])) {
@@ -88,3 +110,5 @@ class registerController implements Controller
     }
 }
 
+$r = new registerController();
+$r->prepare();
