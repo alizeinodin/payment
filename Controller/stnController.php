@@ -7,15 +7,33 @@ class stnController implements Controller
 
     public function validation()
     {
-        // TODO: Implement validation() method.
+        if (!isset($_POST['stn'])) {
+            echo json_encode([
+                'success' => 0,
+            ]);
+        }
+        if ($this->isRegister()) {
+            echo json_encode([
+                'success' => 0
+            ]);
+        }
+        if (!$this->isSSCESStudent()){
+            echo json_encode([
+                'success' => 0
+            ]);
+        }
     }
 
     public function prepare()
     {
-        // TODO: Implement prepare() method.
+        $this->validation();
+
+        echo json_encode([
+            'success' => 1,
+        ]);
     }
 
-    private function notRegister()
+    private function isRegister()
     {
         $_DB = new DB();
 
@@ -24,7 +42,7 @@ class stnController implements Controller
 
         $result = $prepare->fetchAll();
 
-        if (count($result) == 0) {
+        if (count($result) != 0) {
             return true;
         }
         return false;
