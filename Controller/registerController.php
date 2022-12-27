@@ -130,7 +130,7 @@ class registerController implements Controller
     private function phoneValidation()
     {
         if (isset($_POST['phone']) and
-            preg_match("09([0-9][0-9])-?[0-9]{3}-?[0-9]{4}", $_POST['phone'])) {
+            preg_match("/09([0-9][0-9])-?[0-9]{3}-?[0-9]{4}/gm", $_POST['phone'])) {
             return true;
         }
         return false;
