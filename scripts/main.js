@@ -13,7 +13,7 @@ inputs[2].addEventListener("keyup", () => {
     stunumber.style.display = "none";
     let data = { stn: inputs[2].value };
 
-    $.ajax({
+    $.ajxax({
       type: "POST",
       url: "https://ssces.barfenow.ir/Controller/stnController.php",
       data,
