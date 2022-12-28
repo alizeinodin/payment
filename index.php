@@ -21,6 +21,9 @@ $_SESSION['csrf_token'] = $token;
 </head>
 <body>
 <div class="main">
+<div class="boxError">
+        <span id="erroMessage">شما قبلا ثبت نام کرده اید.</span>
+      </div>
     <form action="Controller/registerController.php" method="post">
             <span id="title">ثبت نام در سمینار</span>
             <input type="hidden" name="csrf_token" value="<?php echo $token; ?>">

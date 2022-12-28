@@ -8,6 +8,32 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+.boxError{
+  position: absolute;
+  top: 16px;
+  right: 8px;
+  width: 250px;
+  height: 70px;
+  background-color: #f44336;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: errorAnim 3s;
+}
+#erroMessage{
+color: #fff;
+font-family: "Vazir-Regular";
+font-size: 16px;
+}
+@keyframes errorAnim {
+  from {
+    opacity: 100;
+  }
+  to {
+    opacity: 0;
+  }
+}
 .main {
   width: 100vw;
   height: 93vh;
@@ -228,6 +254,9 @@ canvas {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  .boxError{
+    top: 65vw;
   }
   input {
     height: 64px;
