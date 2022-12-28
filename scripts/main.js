@@ -8,10 +8,10 @@ let form = document.getElementsByTagName("form");
 const showNameError = () => {
   Name.style.display = "block";
 };
-inputs[2].addEventListener("keyup", () => {
-  if (inputs[2].value.length == 10 || inputs[2].value.length == 11) {
+inputs[3].addEventListener("keyup", () => {
+  if (inputs[3].value.length == 10 || inputs[3].value.length == 11) {
     stunumber.style.display = "none";
-    let data = { stn: inputs[2].value };
+    let data = { stn: inputs[3].value };
 
     $.ajax({
       type: "POST",
@@ -30,26 +30,30 @@ inputs[2].addEventListener("keyup", () => {
     });
   } else {
     stunumber.style.display = "block";
+    Name.style.display = "none";
+    nationcode.style.display = "none";
+    tell.style.display = "none";
     price.innerHTML = "20,000 تومان";
   }
 });
-inputs[0].addEventListener("keyup", () => {
-  inputs[0].value.length < 4
-    ? (Name.style.display = "block")
-    : (Name.style.display = "none");
-});
 inputs[1].addEventListener("keyup", () => {
-  inputs[1].value.length < 10
-    ? (nationcode.style.display = "block")
+  inputs[1].value.length < 4
+    ? (Name.style.display = "block") && (nationcode.style.display = "none") && (tell.style.display = "none") && (stunumber.style.display == "none")
+    : (Name.style.display = "none");
+
+});
+inputs[2].addEventListener("keyup", () => {
+  inputs[2].value.length < 10
+    ? (Name.style.display = "none") && (nationcode.style.display = "block") && (tell.style.display = "none") && (stunumber.style.display == "none")
     : (nationcode.style.display = "none");
 });
-inputs[3].addEventListener("keyup", () => {
+inputs[4].addEventListener("keyup", () => {
   const regex = new RegExp(
     /^09([0-1][0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/
   );
   regex.test(inputs[3].value)
     ? (tell.style.display = "none")
-    : (tell.style.display = "block");
+    : (Name.style.display = "none") && (nationcode.style.display = "none") && (tell.style.display = "block") && (stunumber.style.display == "none")
 });
 form[0].addEventListener("submit", () => {
   if (
