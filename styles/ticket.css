@@ -125,28 +125,55 @@ body {
   border: none;
   border-radius: 8px;
 }
-.text{
+#printbtn:hover{
+  cursor: pointer;
+}
+.text {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#text1{
+#text1 {
   font-size: 14px;
   font-family: "Vazir-Regular";
   color: #fff;
 }
-#text2{
+#text2 {
   font-size: 22px;
   font-family: "Vazir-Medium";
   margin-top: 16px;
   color: #fff;
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1280px) {
   .ticketContainer {
-    width: 80vw;
+    width: 40vw;
   }
   .line {
-    width: 76vw;
+    width: 37vw;
+  }
+  #text1 {
+    font-size: 14px;
+    font-family: "Vazir-Regular";
+    color: #fff;
+  }
+  #text2 {
+    font-size: 18px;
+    font-family: "Vazir-Medium";
+    margin-top: 16px;
+    color: #fff;
+  }
+  .ticketHeader > img {
+    width: 73px;
+
+    height: 96px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .ticketContainer {
+    width: 50vw;
+  }
+  .line {
+    width: 47vw;
   }
   .circle {
     width: 5vw;
@@ -154,11 +181,28 @@ body {
     border-radius: 2.5vw;
     background-color: #dfe0e3;
   }
-  .title,.value{
+  .title,
+  .value {
     font-size: 12px;
   }
-  #barcode{
-    width: 75vw;
-  height: 15vh;
+  #barcode {
+    width: 45vw;
+    height: 15vh;
+  }
+  #text1 {
+    font-size: 12px;
+    font-family: "Vazir-Regular";
+    color: #fff;
+  }
+  #text2 {
+    font-size: 16px;
+    font-family: "Vazir-Medium";
+    margin-top: 16px;
+    color: #fff;
+  }
+  .ticketHeader > img {
+    width: 73px;
+
+    height: 96px;
   }
 }

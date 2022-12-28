@@ -59,16 +59,6 @@ form {
   align-items: center;
   justify-content: center;
 }
-#note {
-  font-size: 15px;
-  font-family: "Vazir-Regular";
-  line-height: 20px;
-  color: #a22d14;
-  margin-top: 8px;
-  width: 316px;
-  word-wrap: break-word;
-  text-align: right;
-}
 input {
   width: 320px;
   height: 48px;
@@ -90,10 +80,14 @@ input[type="submit"] {
   width: 160px;
 }
 .error {
-  display: none;
-  font-size: 14px;
-  font-family: "Vazir-Regular";
-  color: red;
+    display: none;
+    font-size: 14px;
+    font-family: "Vazir-Regular";
+    color: #fbfbfb;
+    background-color: #f44336;
+    padding: 20px;
+    box-shadow: #00000045 1px 1px 3px 0px;
+    border-radius: 2px;
 }
 .btn {
   margin-top: 12px;
