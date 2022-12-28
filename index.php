@@ -52,10 +52,6 @@ $_SESSION['csrf_token'] = $token;
             <span class="error" id="tell"
             >شماره تلفن وارد شده معتبر نمی باشد.</span
             >
-            <span id="note"
-            >‌در صورتی که دانشجو کامپیوتر دانشگاه بوعلی سینا هستید با وارد کردن
-            شماره دانشجویی ثبت نام برای شما رایگان می شود.</span
-            >
             <div class="btn">
                 <input type="submit" value="ثبت نام و پرداخت"/>
                 <span id="price">مبلغ: 20,000 تومان</span>
