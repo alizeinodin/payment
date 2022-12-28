@@ -11,19 +11,23 @@
   </head>
   <body>
     <div class="main">
+      <div class="boxError">
+        <span id="erroMessage">شما قبلا ثبت نام کرده اید.</span>
+      </div>
       <form action="">
         <span id="title">ثبت نام در سمینار</span>
-        <input type="text" placeholder="نام نام خانوادگی" />
+        <input type="hidden" name="csrf_token" value="" />
+        <input type="text" placeholder="نام نام خانوادگی" id="namein" />
         <span class="error" id="name">نام وارد شده معتبر نمی باشد.</span>
-        <input type="text" placeholder="کد ملی" />
+        <input type="text" placeholder="کد ملی" id="nationcodein" />
         <span class="error" id="nationcode"
           >کد ملی وارد شده معتبر نمی باشد.</span
         >
-        <input type="text" placeholder="شماره دانشجویی" />
+        <input type="text" placeholder="شماره دانشجویی" id="stunumberin" />
         <span class="error" id="stunumber"
           >شماره دانشجویی وارد شده معتبر نمی باشد.</span
         >
-        <input type="tel" placeholder="َشماره تلفن همراه" />
+        <input type="tel" placeholder="َشماره تلفن همراه" id="tellin" />
         <span class="error" id="tell">شماره تلفن وارد شده معتبر نمی باشد.</span>
         <div class="btn">
           <input type="submit" value="ثبت نام و پرداخت" />

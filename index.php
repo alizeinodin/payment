@@ -19,10 +19,13 @@ $_SESSION['csrf_token'] = $token;
 </head>
 <body>
 <div class="main">
+    <div class="boxError">
+        <span id="erroMessage">شما قبلا ثبت نام کرده اید.</span>
+    </div>
     <form action="Controller/registerController.php" method="post">
         <span id="title">ثبت نام در سمینار</span>
         <input type="hidden" name="csrf_token" value="<?php echo $token; ?>">
-        <input type="text" name="name" placeholder="نام نام خانوادگی"/>
+        <input type="text" name="name" placeholder="نام نام خانوادگی" id="namein"/>
         <span class="error" id="name">
                 <?php
                 if (isset($_SESSION['ERROR.type'])) {
@@ -37,21 +40,17 @@ $_SESSION['csrf_token'] = $token;
 
                 ?>
                </span>
-        <input type="text" name="ssn" placeholder="کد ملی"/>
+        <input type="text" name="ssn" placeholder="کد ملی" id="nationcodein"/>
         <span class="error" id="nationcode"
         >کد ملی وارد شده معتبر نمی باشد.</span
         >
-        <input type="text" name="stn" placeholder="شماره دانشجویی"/>
+        <input type="text" name="stn" placeholder="شماره دانشجویی" id="stunumberin"/>
         <span class="error" id="stunumber"
         >شماره دانشجویی وارد شده معتبر نمی باشد.</span
         >
-        <input type="text" name="phone" placeholder="َشماره تلفن همراه"/>
+        <input type="text" name="phone" placeholder="َشماره تلفن همراه" id="tellin"/>
         <span class="error" id="tell"
         >شماره تلفن وارد شده معتبر نمی باشد.</span
-        >
-        <span id="note"
-        >‌در صورتی که دانشجو کامپیوتر دانشگاه بوعلی سینا هستید با وارد کردن
-            شماره دانشجویی ثبت نام برای شما رایگان می شود.</span
         >
         <div class="btn">
             <input type="submit" value="ثبت نام و پرداخت"/>
